@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Nicky Buttigieg</title>
+    <link>https://nickybu.blog/posts/</link>
+    <description>Recent content in Posts on Nicky Buttigieg</description>
+    <generator>Hugo</generator>
+    <language>en-uk</language>
+    <copyright>© [Nicky Buttigieg](nickybu.blog)</copyright>
+    <lastBuildDate>Wed, 01 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://nickybu.blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About these notes</title>
+      <link>https://nickybu.blog/posts/about-these-notes/</link>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://nickybu.blog/posts/about-these-notes/</guid>
+      <description>&lt;p&gt;just a lil thingy, like &lt;a href=&#34;https://nickybu.blog/about-these-notes-2&#34;&gt;another lil thingy&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About these notes 2</title>
+      <link>https://nickybu.blog/posts/about-these-notes-2/</link>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://nickybu.blog/posts/about-these-notes-2/</guid>
+      <description>&lt;p&gt;just another lil thingy&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>kek</title>
+      <link>https://nickybu.blog/posts/kek/</link>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://nickybu.blog/posts/kek/</guid>
+      <description>&lt;p&gt;kekekekeke&#xA;posts&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
