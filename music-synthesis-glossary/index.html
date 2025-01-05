@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><title>CV</title>
+<html><title>music synthesis glossary</title>
 
 
 <meta charset="utf-8" />
@@ -72,16 +72,57 @@
   <div class="grid">
     <div class="page" data-level="1">
       <div class="content">
-        <h1>CV</h1>
+        <h1>music synthesis glossary</h1>
         
 			  
-        <span> published on Jan 1, 2025 </span>
+        <span> published on Jan 5, 2025 </span>
         
         <br>
         <br>
-        <p>bsc
-msc</p>
-<p>work</p>
+        <p>Modular instruments generally perform specific roles and connect between one another (using patch cables) to carry the signal from input to output. Fluctuations in positive and negative voltages cause a speaker to move and reproduce the analog sound.</p>
+<p>Below is a list of terms I&rsquo;ve needed to understand:</p>
+<ul>
+<li>Control Voltage (<strong>CV</strong>) is an analog electrical signal ranging between ± 10 volts that can be used to control trigger or modulate parameters.</li>
+<li><strong>Gates</strong>, <strong>Triggers</strong>, <strong>Clocks</strong>, <strong>Square Waves</strong> toggle between high and low voltage states, often used to trigger sounds or events, synchronise timing, or flip the state of something.</li>
+<li>Clocks provide regular on/off square wave signals used to synchronise sequencers and tempo-based effects.
+<ul>
+<li>Clock dividers/multipliers take an incoming clock and divide/multiply it to create a syncrhonised signal at a different but related rate. They can also be used to divide an audio signal.</li>
+</ul>
+</li>
+<li>Gates can be held open whereas Triggers provide a brief high state which otherwise remains off. Clocks and square waves repeatedly toggle between high and low states.</li>
+<li><strong>Pitch</strong></li>
+<li><strong>Envelope</strong> is a contoured unipolar (+ or -) CV single cycle function. Typically come with controls for attack delay, sustain and release (ADSR) and can be used to shape a sound once a triggering event occurs.
+<ul>
+<li>Attack determines whether the note will start abruptly or fade in</li>
+<li>Decay rate determines how the note fades to the sustain level</li>
+<li>Release determines how long it takes to fade to silence</li>
+</ul>
+</li>
+<li><strong>Oscillators</strong> repeatedly fluctuate (cycle) back and forth between positive and negative voltages (bipolar signal). The amplitude refers to the size of fluctuation, while frequency is the rate or speed of these cycles.
+<ul>
+<li>Gives a synth its characteristic sound and timbre/tone. Controlled by volts per octave (V/oct) sent by CV informing the oscillator what frequency to oscillate at in order to produce a musical note.</li>
+<li>In most cases they are used to output sound, requiring an amplifier and envlope to control when notes turn on and off.</li>
+</ul>
+</li>
+<li>Low Frequency Oscillators <strong>LFOs</strong> oscillate too slow to be perceived as pitch but useful for controlling parameters to rise and fall</li>
+<li>Musical Instrument Digital Interface (<strong>MIDI</strong>) is a polphonic digital control protocol. A MIDI signal is able to transmit information about when a key is pressed/released, processing like sustain and modulation, and continuous control (CC) messages. It can be used to control other instruments, through CV for example</li>
+<li><strong>Timbre</strong> is the wave shape</li>
+<li><strong>Slewing</strong>: smoothes out the signal by introducing a low pass filter.</li>
+<li><strong>Attenuators</strong> (unipolar) or <strong>attenuverters</strong> (bipolar) serve to control the amount of signal sent to an input, allowing you to tame it into a more subtle range. They can control both the amount and polarity of incoming signal</li>
+<li>Filter (<strong>VCF</strong>): remove certrain frequencies in order to shape the sound
+<ul>
+<li>resonance emphasizes the centre or cutoff frequency of the filter</li>
+</ul>
+</li>
+<li>Envelope Generator (<strong>EG</strong>): controls the volume of the amplifier (usually via attack, delay, sustain and release). Each of these is a stage that determines how long it takes for the signal of the oscillator to reach its peak volume, secondary volume, and then drop to zero once the note is released. It also modulates the cutoff frequency of the filter.</li>
+<li>Amplifier (<strong>VCA</strong>): controls volume of the oscillator via volume knob and/or CV, and gates the oscillator/generator to turn the signal on/off.</li>
+<li><strong>Sequencer</strong>: generates musical notes by providing pitch and gain signals that can be patched into oscillators, envelopes, etc.
+<ul>
+<li>They play back a predetermined series of notes.</li>
+<li>Measured in steps, which correspond to a musical length of time (ex: sixteenth note)</li>
+</ul>
+</li>
+</ul>
 
       </div>
       
@@ -93,7 +134,7 @@ msc</p>
    
 
    
-
+      
    
 
    
@@ -108,7 +149,23 @@ msc</p>
 
    
 
+   
 
+
+
+  <div class="bl-section">
+    <h4>Links to this note</h4>
+    <div class="backlinks">
+      
+        <a href="/electronic-music-tools/" class="backlink-anchor">
+          <div class="backlink">
+            <p class="backlink-title">tools to make electronic music with</p>
+            <p class="backlink-preview">you might wanna check out music synthesis glossary for more info about individual components and terms in the modular world.</p>
+          </div>
+        </a>
+      
+    </div>
+  </div>
 
 
       </div>
