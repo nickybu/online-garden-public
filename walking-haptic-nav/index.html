@@ -207,7 +207,9 @@
           method: 'POST',
           headers: {
             'Authorization': ORS_API_KEY,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Origin': ["https://nickybu.github.io", "http://localhost:1313"],
+            'Methods': ['GET'],
           },
           body: JSON.stringify({
             coordinates: [
