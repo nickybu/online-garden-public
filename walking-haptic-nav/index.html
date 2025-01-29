@@ -79,43 +79,26 @@
         
         <br>
         <br>
-        <p>Click the button below to show your current location on the map.</p>
-
+        
 
 <div class="map-wrapper">
-    
     <link rel="stylesheet" 
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           type="text/css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin="anonymous" />
-    
-    
-    <link rel="stylesheet" 
-          href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"
-          type="text/css" />
   
-    
     <script type="text/javascript"
             src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin="anonymous"></script>
-    
-    
-    <script type="text/javascript"
-            src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.min.js"
-            crossorigin="anonymous"></script>
   
     <div class="controls-container">
       <button onclick="getLocation()" class="control-btn">Get My Location</button>
-      <div class="map-search-box">
-        <input type="text" 
-               id="map-destination-search" 
-               name="map-destination" 
-               placeholder="Enter destination..."
-               class="map-search-input">
-        <button onclick="searchMapDestination(event)" 
-                class="control-btn">Get Directions</button>
+      <button onclick="resetView()" class="control-btn">Reset View</button>
+      <button onclick="getDirections()" class="control-btn">Get Directions</button>
+      <div id="coordinates-display">
+        Drag the red marker to set your destination
       </div>
     </div>
     <div id="map-container" style="height: 500px; width: 100%;"></div>
@@ -124,7 +107,7 @@
   <script>
   const ORS_API_KEY = '';
   let map;
-  let currentMarker;
+  let startMarker;
   let destinationMarker;
   let routeLayer;
   
@@ -144,83 +127,77 @@
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
       }).addTo(map);
+  
+      
+      map.on('click', function(e) {
+        setDestinationMarker(e.latlng);
+      });
     }
   
-    if (currentMarker) {
-      map.removeLayer(currentMarker);
+    
+    if (startMarker) {
+      map.removeLayer(startMarker);
     }
     
-    currentMarker = L.marker([lat, lon]).addTo(map)
-      .bindPopup('Your location')
-      .openPopup();
+    startMarker = L.marker([lat, lon], {
+      icon: L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41]
+      })
+    }).addTo(map)
+  
+    
+    map.setView([lat, lon], 13);
   }
   
-  async function searchMapDestination(event) {
-    event?.preventDefault();
+  function setDestinationMarker(latlng) {
+    if (destinationMarker) {
+      map.removeLayer(destinationMarker);
+    }
     
-    const searchInput = document.getElementById('map-destination-search');
-    if (!searchInput) {
-      console.error('Map destination search input not found');
-      return;
-    }
+    destinationMarker = L.marker(latlng, {
+      draggable: true,
+      icon: L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41]
+      })
+    }).addTo(map)
   
-    const searchQuery = searchInput.value.trim();
-    console.log('Search query:', searchQuery);
+    
+    destinationMarker.on('dragend', function() {
+      if (routeLayer) {
+        map.removeLayer(routeLayer);
+      }
+    });
+  }
   
-    if (!searchQuery) {
-      alert('Please enter a destination');
-      return;
-    }
-  
-    try {
-        const searchUrl = new URL('https://api.openrouteservice.org/geocode/search');
-        searchUrl.searchParams.append('text', searchQuery);
-        searchUrl.searchParams.append('size', '1');
-        
-        console.log('Request URL:', searchUrl.toString());
-        
-        const response = await fetch(searchUrl, {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-              'Authorization': ORS_API_KEY,
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': 'https://nickybu.github.io'
-            },
-            mode: 'cors'
-          });
+  function resetView() {
+    if (map && startMarker) {
       
-      if (!response.ok) {
-        throw new Error(`Search failed: ${response.status}`);
+      const pos = startMarker.getLatLng();
+      map.setView(pos, 13);
+      
+      
+      if (routeLayer) {
+        map.removeLayer(routeLayer);
       }
-  
-      const data = await response.json();
-      console.log('Search response:', data);
-  
-      if (data.features && data.features.length > 0) {
-        const location = data.features[0].geometry.coordinates;
-        
-        if (destinationMarker) {
-          map.removeLayer(destinationMarker);
-        }
-        
-        destinationMarker = L.marker([location[1], location[0]]).addTo(map)
-          .bindPopup('Destination: ' + searchQuery);
-        
-        await getDirections();
-      } else {
-        alert('No locations found for your search');
+      
+      
+      if (destinationMarker) {
+        map.removeLayer(destinationMarker);
       }
-    } catch (error) {
-      console.error('Search error:', error);
-      alert('Error searching for location. Please try again.');
     }
   }
   
   async function getDirections() {
-    if (!currentMarker || !destinationMarker) return;
+    if (!startMarker || !destinationMarker) {
+      alert('Please set both start and destination points');
+      return;
+    }
     
-    const start = currentMarker.getLatLng();
+    const start = startMarker.getLatLng();
     const end = destinationMarker.getLatLng();
     
     try {
@@ -230,8 +207,7 @@
           method: 'POST',
           headers: {
             'Authorization': ORS_API_KEY,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             coordinates: [
@@ -247,7 +223,6 @@
       }
   
       const data = await response.json();
-      console.log('Directions response:', data);
       
       if (routeLayer) {
         map.removeLayer(routeLayer);
@@ -305,20 +280,14 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    align-items: center;
   }
   
-  .map-search-box {
-    flex: 1;
-    display: flex;
-    gap: 10px;
-  }
-  
-  .map-search-input {
-    flex: 1;
+  #coordinates-display {
     padding: 8px;
-    border: 1px solid #ddd;
+    background: #f5f5f5;
     border-radius: 4px;
-    min-width: 200px;
+    font-family: monospace;
   }
   
   .control-btn {
@@ -404,7 +373,7 @@ window.store = {
         
         "title": "walking navigation with haptic feedback",
         "tags": [],
-        "content": "Click the button below to show your current location on the map.\nGet My Location Get Directions ", 
+        "content": " Get My Location Reset View Get Directions Drag the red marker to set your destination ", 
         "url": "https:\/\/nickybu.blog\/walking-haptic-nav\/"
     },
     
