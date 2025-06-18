@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Newsletters on Nicky Buttigieg</title>
+    <link>http://localhost:1313/newsletters/</link>
+    <description>Recent content in Newsletters on Nicky Buttigieg</description>
+    <generator>Hugo</generator>
+    <language>en-uk</language>
+    <copyright>© [Nicky Buttigieg](nickybu.blog)</copyright>
+    <lastBuildDate>Sun, 05 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/newsletters/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>13th February 2025</title>
+      <link>http://localhost:1313/newsletters/2025-02-13/</link>
+      <pubDate>Sat, 23 Sep 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/newsletters/2025-02-13/</guid>
+      <description>&lt;p&gt;Testing publishing from my phone. Woopwoop.&lt;/p&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s see how long this update takes from writing to being live.&lt;/p&gt;&#xA;&lt;p&gt;Test test teat&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
